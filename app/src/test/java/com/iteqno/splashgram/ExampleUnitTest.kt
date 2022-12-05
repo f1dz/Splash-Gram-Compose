@@ -1,4 +1,4 @@
-package com.iteqno.splahgram
+package com.iteqno.splashgram
 
 import org.junit.Test
 
