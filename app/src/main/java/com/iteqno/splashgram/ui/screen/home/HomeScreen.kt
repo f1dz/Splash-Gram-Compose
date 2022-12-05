@@ -1,4 +1,4 @@
-package com.iteqno.splashgram.ui.screen
+package com.iteqno.splashgram.ui.screen.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
