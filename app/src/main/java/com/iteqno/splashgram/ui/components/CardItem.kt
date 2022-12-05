@@ -18,8 +18,10 @@ import com.iteqno.splashgram.ui.theme.SplashGramTheme
 @Composable
 fun CardItem(
     photo: Photo,
+    modifier: Modifier = Modifier
 ) {
     Box(
+        modifier = modifier
     ) {
         Column {
             UserInfo(

@@ -1,5 +1,6 @@
 package com.iteqno.splashgram.ui.screen.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,13 +20,16 @@ import com.iteqno.splashgram.ui.theme.SplashGramTheme
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToDetail: (String) -> Unit
 ) {
     Column(
         modifier = modifier
     ) {
         UserRow()
-        PhotosList()
+        PhotosList(
+            modifier = modifier,
+            navigateToDetail = navigateToDetail)
     }
 }
 
@@ -54,6 +58,8 @@ fun UserRow(
 
 @Composable
 fun PhotosList(
+    modifier: Modifier = Modifier,
+    navigateToDetail: (String) -> Unit
 ) {
     val photos = mutableListOf<Photo>()
     photos.add(DummyData.photo)
@@ -67,15 +73,21 @@ fun PhotosList(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(photos) { photo ->
-            CardItem(photo = photo)
+            CardItem(photo = photo,
+                modifier = Modifier.clickable {
+                    navigateToDetail(photo.id)
+                }
+            )
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview(){
+fun HomeScreenPreview() {
     SplashGramTheme {
-        HomeScreen()
+        HomeScreen(navigateToDetail = {
+
+        })
     }
 }
