@@ -1,4 +1,4 @@
-package com.iteqno.splahgram.ui.theme
+package com.iteqno.splashgram.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

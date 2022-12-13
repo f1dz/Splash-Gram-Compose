@@ -1,4 +1,4 @@
-package com.iteqno.splahgram
+package com.iteqno.splashgram
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
