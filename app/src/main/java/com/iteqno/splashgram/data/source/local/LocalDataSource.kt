@@ -1,4 +1,3 @@
-
 package com.iteqno.splashgram.data.source.local
 
 import com.iteqno.splashgram.data.source.local.entity.PhotoEntity
@@ -15,16 +14,15 @@ class LocalDataSource(private val photoDao: PhotoDao) {
 
     suspend fun insertPhotos(photoList: List<PhotoEntity>) = photoDao.insertPhotos(photoList)
 
-     fun setLovedPhoto(photo: PhotoEntity, newState: Boolean) {
+    fun setLovedPhoto(photo: PhotoEntity, newState: Boolean) {
         photo.isLoved = newState
-
-            GlobalScope.launch {
-                if (photoDao.getPhoto(photo.id) == 0) {
-                    photoDao.insertPhoto(photo)
-                } else {
-                    photoDao.updateLovedPhoto(photo)
-                }
+        GlobalScope.launch {
+            if (photoDao.getPhoto(photo.id) == 0) {
+                photoDao.insertPhoto(photo)
+            } else {
+                photoDao.updateLovedPhoto(photo)
             }
+        }
     }
 
 }

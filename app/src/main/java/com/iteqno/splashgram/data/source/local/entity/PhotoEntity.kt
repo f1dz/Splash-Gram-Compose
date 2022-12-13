@@ -1,8 +1,7 @@
 package com.iteqno.splashgram.data.source.local.entity
 
-import androidx.annotation.NonNull
 import androidx.room.*
-import retrofit2.Converter
+import com.iteqno.splashgram.utils.Converter
 
 @Entity(tableName = "photo")
 @TypeConverters(Converter::class)
