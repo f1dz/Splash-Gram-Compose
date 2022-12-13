@@ -1,6 +1,6 @@
 package com.iteqno.splashgram.data
 
-import com.iteqno.splashgram.data.model.*
+import com.iteqno.splashgram.domain.model.*
 
 class DummyData {
     companion object {

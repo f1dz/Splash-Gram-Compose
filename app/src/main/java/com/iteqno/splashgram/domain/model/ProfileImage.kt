@@ -1,4 +1,4 @@
-package com.iteqno.splashgram.data.model
+package com.iteqno.splashgram.domain.model
 
 data class ProfileImage(
     val small: String,

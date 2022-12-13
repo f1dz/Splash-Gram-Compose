@@ -9,27 +9,51 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.iteqno.splashgram.data.DummyData
-import com.iteqno.splashgram.data.model.Photo
+import com.iteqno.splashgram.domain.model.Photo
+import com.iteqno.splashgram.ui.common.UiState
 import com.iteqno.splashgram.ui.components.CardItem
 import com.iteqno.splashgram.ui.components.UserItem
 import com.iteqno.splashgram.ui.theme.SplashGramTheme
+import org.koin.androidx.compose.get
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = get(),
     navigateToDetail: (String) -> Unit
 ) {
+//    val viewModel = get<HomeViewModel>()
     Column(
         modifier = modifier
     ) {
         UserRow()
-        PhotosList(
-            modifier = modifier,
-            navigateToDetail = navigateToDetail)
+
+        viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
+            when (uiState) {
+                is UiState.Loading -> {
+                    viewModel.getAllPhotos()
+                }
+                is UiState.Success -> {
+                    uiState.data?.let {
+                        PhotosList(
+                            photos = it,
+                            navigateToDetail = navigateToDetail
+                        )
+                    }
+                }
+                is UiState.Error -> {}
+            }
+        }
+
+
+
+//        PhotosList(
+//            modifier = modifier,
+//            navigateToDetail = navigateToDetail)
     }
 }
 
@@ -58,19 +82,13 @@ fun UserRow(
 
 @Composable
 fun PhotosList(
+    photos: List<Photo>,
     modifier: Modifier = Modifier,
     navigateToDetail: (String) -> Unit
 ) {
-    val photos = mutableListOf<Photo>()
-    photos.add(DummyData.photo)
-    photos.add(DummyData.photo)
-    photos.add(DummyData.photo)
-    photos.add(DummyData.photo)
-    photos.add(DummyData.photo)
-    photos.add(DummyData.photo)
-    photos.add(DummyData.photo)
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier
     ) {
         items(photos) { photo ->
             CardItem(photo = photo,

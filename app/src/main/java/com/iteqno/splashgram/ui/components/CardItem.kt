@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.iteqno.splashgram.data.DummyData
-import com.iteqno.splashgram.data.model.Photo
+import com.iteqno.splashgram.domain.model.Photo
 import com.iteqno.splashgram.ui.theme.SplashGramTheme
 
 @Composable
